@@ -1,0 +1,56 @@
+server:
+  port: 45001
+  servlet:
+    context-path: /api
+# add euroka url
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka7
+spring:
+  cloud:
+    config:
+      enabled: false
+  application:
+    name: space-service
+
+
+  #  config:
+  #    import: configserver:http://localhost:8888
+  #    profile: dev
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:212.227.239.73}:${DB_PORT:5432}/${DB_NAME:cenasa_space}
+    username: nafann
+    password: n@f@nn@2023&cenasa@
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8082/realms/cenasa
+#
+#jwt:
+#  auth:
+#    converter:
+#      resource-id: authenticationClientId
+
+
+
+
+
+
+
+
+
+
