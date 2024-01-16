@@ -74,7 +74,7 @@ public class ReservationController {
             return ResponseEntity.ok().body(reservationDTO);
         }
 
-        //get status of the reservation by UUID
+        //get status of the reservation by UUID this is for the client
         @GetMapping("/{id}/status")
         public ResponseEntity<ReservationSatus> getStatus(@PathVariable(value = "id") UUID reservationId) {
             ReservationSatus reservationSatus = reservationService.getStatus(reservationId);
