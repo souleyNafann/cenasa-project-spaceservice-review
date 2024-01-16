@@ -3,10 +3,10 @@ server:
   servlet:
     context-path: /api
 # add euroka url
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka7
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka7
 spring:
   cloud:
     config:

@@ -68,9 +68,17 @@ public class ReservationController {
 
         @PutMapping("/{id}/reject") // this is for reject the reservation the reason must be in the body
         public ResponseEntity<ReservationDTO> rejectReservation(@PathVariable(value = "id") UUID reservationId,
+
                                                                 @Valid @RequestBody String reason) {
             ReservationDTO reservationDTO = reservationService.rejectReservation(reservationId, reason);
             return ResponseEntity.ok().body(reservationDTO);
+        }
+
+        //get status of the reservation by UUID
+        @GetMapping("/{id}/status")
+        public ResponseEntity<ReservationSatus> getStatus(@PathVariable(value = "id") UUID reservationId) {
+            ReservationSatus reservationSatus = reservationService.getStatus(reservationId);
+            return ResponseEntity.ok().body(reservationSatus);
         }
 
 

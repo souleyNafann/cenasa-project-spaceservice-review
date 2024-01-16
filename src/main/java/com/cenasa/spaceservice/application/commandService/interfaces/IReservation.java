@@ -2,6 +2,7 @@ package com.cenasa.spaceservice.application.commandService.interfaces;
 
 import com.cenasa.spaceservice.domain.models.commands.ReservationCommand;
 import com.cenasa.spaceservice.domain.models.entities.Reservation;
+import com.cenasa.spaceservice.domain.models.entities.ReservationSatus;
 import com.cenasa.spaceservice.infrastructure.controllers.dto.ReservationDTO;
 
 import java.util.List;
@@ -28,4 +29,7 @@ public interface IReservation {
 
     // it's use for reject the reservation by UUID
     ReservationDTO rejectReservation(UUID id, String reason);
+
+    // get status of the reservation by UUID
+    ReservationSatus getStatus(UUID id);
 }

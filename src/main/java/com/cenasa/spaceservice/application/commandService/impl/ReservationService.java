@@ -4,7 +4,7 @@ package com.cenasa.spaceservice.application.commandService.impl;
 import com.cenasa.spaceservice.application.commandService.interfaces.IReservation;
 import com.cenasa.spaceservice.application.exceptions.ConflictException;
 import com.cenasa.spaceservice.application.exceptions.NotFoundException;
-import com.cenasa.spaceservice.application.outboundService.interfaces.EmailService;
+//import com.cenasa.spaceservice.application.outboundService.interfaces.EmailService;
 import com.cenasa.spaceservice.domain.models.commands.ReservationCommand;
 import com.cenasa.spaceservice.domain.models.entities.Reservation;
 import com.cenasa.spaceservice.domain.models.entities.ReservationSatus;
@@ -32,16 +32,16 @@ public class ReservationService implements IReservation {
     private final CalandarRepository calandarRepository;
     private final ModelMapper modelMapper;
 
-    private final EmailService emailService;
+//    private final EmailService emailService;
 
     // this is the constructor of the ReservationService
-    public ReservationService(ReservationRepository reservationRepository, SpaceRepository spaceRepository, CalandarRepository calandarRepository, ModelMapper modelMapper, EmailService emailService) {
+    public ReservationService(ReservationRepository reservationRepository, SpaceRepository spaceRepository, CalandarRepository calandarRepository, ModelMapper modelMapper) {
         this.reservationRepository = reservationRepository;
         this.spaceRepository = spaceRepository;
         this.calandarRepository = calandarRepository;
 
         this.modelMapper = modelMapper;
-        this.emailService = emailService;
+//        this.emailService = emailService;
     }
 
     // it's use for create the reservation
@@ -128,7 +128,7 @@ public class ReservationService implements IReservation {
 
             reservation.setStatus(ReservationSatus.ON_PENDING_FOR_ACCOUNTING_PAYMENT_APPROVAL);
             reservationRepository.save(reservation);
-            emailService.sendEmailSpaceReservationConfirm(reservation);
+//            emailService.sendEmailSpaceReservationConfirm(reservation);
             // mail must be sent here
             // generate bill
         }
@@ -187,6 +187,16 @@ public class ReservationService implements IReservation {
             return modelMapper.map(reservation.get(), ReservationDTO.class);
 
 
+        }
+        throw new NotFoundException("Reservation not found");
+    }
+
+    // get status of the reservation by UUID
+    @Override
+    public ReservationSatus getStatus(UUID id) {
+        Optional<Reservation> reservation = reservationRepository.findById(id);
+        if (reservation.isPresent()) {
+            return reservation.get().getStatus();
         }
         throw new NotFoundException("Reservation not found");
     }
